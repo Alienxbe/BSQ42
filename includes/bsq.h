@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:43:52 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/21 20:01:02 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 00:29:01 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 # include <stdio.h>
 
 typedef int **t_tab;
+
+typedef struct s_data
+{
+	t_block	block;
+	int		height;
+	int		width;
+}	t_data;
 
 typedef struct s_block
 {
