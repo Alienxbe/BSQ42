@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 13:01:11 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 15:36:35 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	get_params(t_data *data, char *line)
 	return (0);
 }
 
-static int	malloc_tab(t_data data)
+static int	malloc_tab(char *line, t_data *data)
 {
 	
 }
@@ -69,7 +69,7 @@ int	fill_tab(t_data *data, char *filename)
 			// Check char
 			// fill ligne
 			data->width = ft_strlen(line);
-			data->tab = malloc_tab(); // Fonction a faire
+			data->tab = malloc_tab(line, data); // Fonction a faire
 		}
 		else
 		{
