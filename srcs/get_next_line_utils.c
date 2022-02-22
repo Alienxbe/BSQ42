@@ -6,13 +6,13 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:51:30 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/21 18:55:38 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 17:20:47 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int	free_return(char **str, int ret_value)
+int	gnl_free_return(char **str, int ret_value)
 {
 	if (*str)
 		free(*str);
