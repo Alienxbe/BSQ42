@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 19:03:18 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 23:15:13 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ static int	open_file(char *filename)
 
 static int	get_params(t_data *data, char *line)
 {
-	if (ft_strlen(line) != 4 || !ft_isdigit(line[0])
-		|| !ft_str_is(line + 1, &ft_isprint))
+	int	height;
+
+	height = ft_atoi(&line);
+	if (height <= 0 || ft_strlen(line) != 3 || !ft_str_is(line, &ft_isprint))
 		return (MAP_ERROR);
-	data->height = line[0] - '0';
-	data->block.empty = line[1];
-	data->block.obs = line[2];
-	data->block.full = line[3];
+	data->height = height;
+	data->block.empty = line[0];
+	data->block.obs = line[1];
+	data->block.full = line[2];
 	return (0);
 }
 

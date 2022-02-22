@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:46:24 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 22:10:38 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 23:35:20 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,14 @@ int	main(void)
 {
 	t_data	data;
 	t_sqr	sqr;
-	int	o;
 
-	o = fill_tab(&data, "map.test");
-	print_grid(&data);
+	if (fill_tab(&data, "map.test"))
+	{
+		printf("Map error!");
+		return (MAP_ERROR);
+	}
+	// print_grid(&data);
+	printf("Solving...\n");
 	sqr = solve_tab(&data);
 	printf("\n");
 	printf("hauteur = %d | largeur = %d | size : %d\n\n", sqr.y, sqr.x, sqr.size);

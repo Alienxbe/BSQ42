@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:43:52 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 21:46:44 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 23:12:36 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_data
 
 // Square
 t_sqr	solve_tab(t_data *data);
-int	fill_with_square(t_data *data, t_sqr sqr);
+int		fill_with_square(t_data *data, t_sqr sqr);
 
 // Tab
 int		fill_tab(t_data *data, char *filename);
@@ -81,6 +81,7 @@ char	*ft_substr(char *s, int start, int len, int s_free);
 void	*ft_memcpy(void *dest, void *src, int n);
 int		ft_strlen(char *s);
 int		ft_index(char *s, char c);
+int		ft_atoi(char **str);
 
 // Malloc's
 int		malloc_tab(t_data *data, char *line);

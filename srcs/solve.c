@@ -6,40 +6,48 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/22 22:40:26 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 23:35:13 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int	check_obs(t_data *data, int size, int x, int y)
+int	check_obs(t_data *data, t_sqr sqr)
 {
 	int	i;
 	int	j;
 
-	i = y - 1;
-	if (x + size >= data->height || y + size >= data->width)
+	if (sqr.x + sqr.size - 1 >= data->width
+		|| sqr.y + sqr.size - 1 >= data->height)
 		return (ERROR);
-	while (++i < size)
+	i = -1;
+	while (++i < sqr.size)
 	{
-		j = x - 1;
-		while (++j < size)
-		{
-			printf("testing [%d][%d]\n", y + i, x + j);
-			if (y + i < data->height && x + j < data->width)
-			{
-				if (data->tab[x + i][x + j])
-					return (ERROR);
-			}
-		}
+		j = -1;
+		while (++j < sqr.size)
+			if (data->tab[sqr.y + i][sqr.x + j])
+				return (ERROR);
 	}
 	return (0);
+}
+
+t_sqr	find_biggest_sqr(t_data *data, int x, int y)
+{
+	t_sqr	sqr;
+
+	sqr.x = x;
+	sqr.y = y;
+	sqr.size = 1;
+	while (!check_obs(data, sqr))
+		sqr.size++;
+	sqr.size--;
+	return (sqr);
 }
 
 t_sqr	solve_tab(t_data *data)
 {
 	t_sqr	sqr;
-	int		i;
+	t_sqr	tmp;
 	int		x;
 	int		y;
 
@@ -54,15 +62,9 @@ t_sqr	solve_tab(t_data *data)
 		{
 			if (!data->tab[y][x])
 			{
-				i = 0;
-				while (!check_obs(data, sqr.size + i, x, y))
-					i++;
-				if (i)
-				{
-					sqr.size = sqr.size + i - 1;
-					sqr.x = x;
-					sqr.y = y;
-				}
+				tmp = find_biggest_sqr(data, x, y);
+				if (tmp.size > sqr.size)
+					sqr = tmp;
 			}
 		}
 	}
