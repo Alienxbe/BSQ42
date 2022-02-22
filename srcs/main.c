@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:46:24 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 20:57:35 by ademurge         ###   ########.fr       */
+/*   Updated: 2022/02/22 21:29:48 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(void)
 	printf("\n");
 	//printf("hauteur = %d | largeur = %d | size : %d\n\n", sqr.y, sqr.x, sqr.size - 1);
 	fill_with_square(&data, sqr);
-	print_grid(&data);
+	// print_grid(&data);
 	ft_free_tab(data.tab, data.height);
 	return (0);
 }
