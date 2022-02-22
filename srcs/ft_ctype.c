@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 00:44:37 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 00:45:53 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 12:50:21 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,14 @@ int	ft_isdigit(char c)
 int	ft_isprint(char c)
 {
 	return (c >= 32 && c <= 126);
+}
+
+int	ft_str_is(char *str, int (*f)(char))
+{
+	if (!str || !f)
+		return (0);
+	while (*str)
+		if (!f(*str++))
+			return (0);
+	return (1);
 }
