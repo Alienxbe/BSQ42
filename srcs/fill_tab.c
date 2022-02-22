@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 17:42:18 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 19:00:35 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	get_params(t_data *data, char *line)
 	if (ft_strlen(line) != 4 || !ft_isdigit(line[0])
 		|| !ft_str_is(line + 1, &ft_isprint))
 		return (MAP_ERROR);
-	data->height = line[0];
+	data->height = line[0] - '0';
 	data->block.empty = line[1];
 	data->block.obs = line[2];
 	data->block.full = line[3];
@@ -67,14 +67,15 @@ int	fill_tab(t_data *data, char *filename)
 		byte = get_next_line(fd, &line);
 		if (byte < 0)
 			return (GNL_ERROR);
-		if (byte && !++i && get_params(data, line)) // First line read
+		if (byte && !i && get_params(data, line)) // First line read
 			return (MAP_ERROR);
 		if (byte && i == 1 && malloc_tab(data, line)) // First map line
 			return (MALLOC_ERROR);
 		if (byte && i > 0 && fill_line(data, line, i - 1)) // Read line
 			return (MAP_ERROR);
+		i++;
 	}
-	if (i - 1 != data->height)
+	if (i - 2 != data->height)
 		return (MAP_ERROR);
 	return (0);
 }
