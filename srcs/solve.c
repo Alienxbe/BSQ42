@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/22 17:42:43 by ademurge         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:00:33 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,34 @@
 
 int	check_plague(t_data data, int size, int x, int y)
 {
-	int	i;
-	int	x_tmp;
-	i = 0;
-	while (check_if_in_tab(data, x, y))
-	{
-		while (y < data.height)
-			{
-				
-				while ()
-				
-			}
-			return (1);
-		if (data.tab[y][x + i] == data.block.obs)
-			return (1);
-		
-	}
+	int	tmp;
+
+	while (y < data.height && y < y + size)
+		{
+			tmp = x - 1;
+			while (tmp < tmp + size && tmp < data.width)
+				if (data.tab[y][tmp++] == data.block.obs)
+					return (1);
+			if (tmp >= data.width)
+				return  (1);
+			y++;
+		}
+	if (y >= data.height)
+		return(1);
+	else
+		return (0);
 }
 
-t_sqr	plague(t_data *data,t_sqr *max, int x, int y)
+t_sqr	plague(t_data *data, t_sqr *max, int x, int y)
 {
 	int	size_tmp;
 	
+	size_tmp = max->size;
 	if (y + max->size >= data->height || x + max->size >= data->width)
 		return (*max);
-	while (check_plague(*data, max->size, x, y))
+	while (check_plague(*data, size_tmp, x, y))
 	{
-		size_tmp = max->size + 1;
+		size_tmp++;
 		if (check_plague(*data, size_tmp, x, y))
 		{
 			max->size++;
@@ -51,7 +52,7 @@ t_sqr	plague(t_data *data,t_sqr *max, int x, int y)
 	return (*max);
 }
 
-int solve_tab(t_data *data)
+t_sqr solve_tab(t_data *data)
 {
 	t_sqr	max;
 	int y;
@@ -70,5 +71,5 @@ int solve_tab(t_data *data)
 			}
 		}
 	}
-
+	return (max);
 }
