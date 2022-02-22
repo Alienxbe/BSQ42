@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/22 18:00:33 by ademurge         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:03:16 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	check_plague(t_data data, int size, int x, int y)
 	int	tmp;
 
 	while (y < data.height && y < y + size)
-		{
-			tmp = x - 1;
-			while (tmp < tmp + size && tmp < data.width)
-				if (data.tab[y][tmp++] == data.block.obs)
-					return (1);
-			if (tmp >= data.width)
-				return  (1);
-			y++;
-		}
+	{
+		tmp = x - 1;
+		while (tmp < tmp + size && tmp < data.width)
+			if (data.tab[y][tmp++] == data.block.obs)
+				return (1);
+		if (tmp >= data.width)
+			return  (1);
+		y++;
+	}
 	if (y >= data.height)
 		return(1);
 	else
