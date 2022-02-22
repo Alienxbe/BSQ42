@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 19:00:35 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 19:03:18 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ static int	fill_line(t_data *data, char *line, int y)
 	x = -1;
 	while (++x < data->width)
 	{
-		if (!(line[x] == data->block.empty || line[x] == data->block.obs))
+		if (line[x] == data->block.empty)
+			data->tab[y][x] = 0;
+		else if (line[x] == data->block.obs)
+			data->tab[y][x] = 1;
+		else
 			return (MAP_ERROR);
-		data->tab[y][x] = line[x];
 	}
 	return (0);
 }

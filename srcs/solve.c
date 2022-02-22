@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/22 18:51:14 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 19:03:18 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	check_plague(t_data data, int size, int x, int y)
 	{
 		tmp = x - 1;
 		while (tmp < tmp + size && tmp < data.width)
-			if (data.tab[y][tmp++] == data.block.obs)
+			if (data.tab[y][tmp++])
 				return (1);
 		if (tmp >= data.width)
 			return  (1);
@@ -43,7 +43,7 @@ static t_sqr	plague(t_data *data, int x, int y)
 	while (check_plague(*data, size_tmp, x, y))
 	{
 		size_tmp++;
-		if (check_plague(*data, size_tmp, x, y))
+		if (!check_plague(*data, size_tmp, x, y))
 		{
 			max.size++;
 			max.y = y;
@@ -74,3 +74,5 @@ t_sqr solve_tab(t_data *data)
 	}
 	return (max);
 }
+
+int		fill_with_square
