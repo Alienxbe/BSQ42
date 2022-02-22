@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:46:24 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 21:29:48 by ademurge         ###   ########.fr       */
+/*   Updated: 2022/02/22 22:10:38 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	main(void)
 	print_grid(&data);
 	sqr = solve_tab(&data);
 	printf("\n");
-	//printf("hauteur = %d | largeur = %d | size : %d\n\n", sqr.y, sqr.x, sqr.size - 1);
-	fill_with_square(&data, sqr);
+	printf("hauteur = %d | largeur = %d | size : %d\n\n", sqr.y, sqr.x, sqr.size);
+	// fill_with_square(&data, sqr);
 	// print_grid(&data);
 	ft_free_tab(data.tab, data.height);
 	return (0);
