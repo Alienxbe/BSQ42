@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:43:52 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 13:04:54 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 17:19:53 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@
 */
 
 # define BUFFER_SIZE		10
+# define MALLOC_ERROR		1
 # define ERROR				1
 # define OPEN_FILE_ERROR	1
+# define MAP_ERROR			1
+# define GNL_ERROR			1
 
 /*
 ** Typedef
@@ -74,7 +77,11 @@ char	*ft_substr(char *s, int start, int len, int s_free);
 void	*ft_memcpy(void *dest, void *src, int n);
 int		ft_strlen(char *s);
 int		ft_index(char *s, char c);
-int		free_return(char **str, int ret_value);
+
+// Malloc's
+int		malloc_tab(t_data *data, char *line);
+int		gnl_free_return(char **str, int ret_value);
+int		ft_free_tab(t_tab tab, int y);
 
 // Ctype
 int		ft_str_is(char *str, int (*f)(char));

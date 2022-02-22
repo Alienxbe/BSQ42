@@ -6,7 +6,7 @@
 #    By: maykman <maykman@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 19:34:14 by maykman           #+#    #+#              #
-#    Updated: 2022/02/21 19:36:17 by maykman          ###   ########.fr        #
+#    Updated: 2022/02/22 17:21:30 by maykman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,12 @@ NAME		:=	bsq
 INCLUDES	:=	/includes
 
 # FILES
-SRCS		:=	main.c \
+SRCS		:=	fill_tab.c \
+				ft_ctype.c \
+				ft_malloc.c \
 				get_next_line.c \
 				get_next_line_utils.c \
-				fill_tab.c
+				main.c
 OBJS		:=	$(addprefix srcs/, ${SRCS:.c=.o})
 
 # RULES

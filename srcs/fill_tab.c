@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 13:01:11 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 17:36:29 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ static int	open_file(char *filename)
 
 static int	get_params(t_data *data, char *line)
 {
-	if (ft_strlen(line) != 4)
-		return (ERROR);
-	if (!ft_isdigit(line[0]) || !ft_str_is(line + 1, &ft_isprint))
-		return (ERROR);
+	if (ft_strlen(line) != 4 || !ft_isdigit(line[0])
+		|| !ft_str_is(line + 1, &ft_isprint))
+		return (MAP_ERROR);
 	data->height = line[0];
 	data->block.empty = line[1];
 	data->block.obs = line[2];
@@ -35,9 +34,20 @@ static int	get_params(t_data *data, char *line)
 	return (0);
 }
 
-static int	malloc_tab(t_data data)
+static int	fill_line(t_data *data, char *line, int y)
 {
-	
+	int	x;
+
+	if (ft_strlen(line) != data->width)
+		return (MAP_ERROR);
+	x = -1;
+	while (++x < data->width)
+	{
+		if (!(line[x] == data->block.empty || line[x] == data->block.obs))
+			return (MAP_ERROR);
+		data->tab[y][x] = line[x];
+	}
+	return (0);
 }
 
 int	fill_tab(t_data *data, char *filename)
@@ -47,7 +57,6 @@ int	fill_tab(t_data *data, char *filename)
 	int		fd;
 	int		i;
 
-	(void)data;
 	fd = open_file(filename);
 	if (fd < 0)
 		return (OPEN_FILE_ERROR);
@@ -57,29 +66,15 @@ int	fill_tab(t_data *data, char *filename)
 	{
 		byte = get_next_line(fd, &line);
 		if (byte < 0)
-			return (ERROR);
-		// Parametres
-		if (!i)
-			if (get_params(data, line))
-				return (ERROR);
-		else if (i == 1)
-		{
-			// Count width
-			// Malloc tab
-			// Check char
-			// fill ligne
-			data->width = ft_strlen(line);
-			data->tab = malloc_tab(); // Fonction a faire
-		}
-		else
-		{
-			// Check width
-			// Check char
-			// Fill ligne
-			if (ft_strlen(line) != data->width)
-				return (ERROR);
-		}
-		i++;
+			return (GNL_ERROR);
+		if (byte && !++i && get_params(data, line)) // First line read
+			return (MAP_ERROR);
+		if (byte && i == 1 && malloc_tab(data, line)) // First map line
+			return (MALLOC_ERROR);
+		if (byte && i > 0 && fill_line(data, line, i - 1)) // Read line
+			return (MAP_ERROR);
 	}
+	if (i - 1 != data->height)
+		return (MAP_ERROR);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:48:36 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/21 19:15:14 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 17:20:43 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_next_line(int fd, char **line)
 
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!line || read(fd, NULL, 0) < 0 || !buff)
-		return (free_return(&buff, -1));
+		return (gnl_free_return(&buff, -1));
 	bytes = 1;
 	while (ft_index(saved, '\n') < 0 && bytes != 0)
 	{
@@ -45,15 +45,15 @@ int	get_next_line(int fd, char **line)
 		buff[bytes] = 0;
 		saved = gnl_strjoin(saved, buff);
 		if (!saved)
-			return (free_return(&buff, -1));
+			return (gnl_free_return(&buff, -1));
 	}
 	free(buff);
 	*line = ft_substr(saved, 0, ft_index(saved, '\n'), 0);
 	saved = ft_substr(saved, ft_index(saved, '\n') + 1,
 			ft_strlen(saved) - ft_index(saved, '\n'), 1);
 	if (!*line || !saved)
-		return (free_return(line, -1));
+		return (gnl_free_return(line, -1));
 	if (!bytes)
-		return (free_return(&saved, 0));
+		return (gnl_free_return(&saved, 0));
 	return (1);
 }
