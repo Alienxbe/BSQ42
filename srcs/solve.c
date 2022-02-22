@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/22 19:13:18 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 21:00:03 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,44 @@
 
 static int	check_plague(t_data data, int size, int x, int y)
 {
-	int	tmp;
+	int	x_tmp;
+	int y_tmp;
 
-	while (y < data.height && y < y + size)
+	y_tmp = y;
+	while (y_tmp < data.height && y_tmp < y + size)
 	{
-		tmp = x - 1;
-		while (tmp < tmp + size && tmp < data.width)
-			if (data.tab[y][tmp++])
-				return (1);
-		if (tmp >= data.width)
-			return  (1);
-		y++;
+		x_tmp = x;
+		while (x_tmp < x + size && x_tmp < data.width)
+			if (data.tab[y_tmp][x_tmp++])
+				return (0);
+		if (x_tmp >= data.width)
+			return (0);
+		y_tmp++;
 	}
 	if (y >= data.height)
-		return(1);
+		return(0);
 	else
-		return (0);
+		return (1);
 }
 
 t_sqr	plague(t_data *data,t_sqr *max, int x, int y)
 {
 	int	size_tmp;
+	int	i;
 
-	if (y + max->size >= data->height || x + max->size >= data->width)
-		return (*max);
-	while (check_plague(*data, max->size, x, y))
+	i = 0;
+	size_tmp = max->size;
+	if (y + max->size > data->height || x + max->size > data->width)
+		return (*max);	
+	while (check_plague(*data, size_tmp, x, y))
 	{
-		size_tmp = max->size + 1;
 		if (check_plague(*data, size_tmp, x, y))
 		{
 			max->size++;
 			max->y = y;
 			max->x = x;
 		}
+		size_tmp = max->size;
 	}
 	return (*max);
 }
@@ -73,4 +78,21 @@ t_sqr	solve_tab(t_data *data)
 	return (max);
 } 
 
-// int		fill_with_square
+int	fill_with_square(t_data *data, t_sqr sqr)
+{
+	int	y;
+	int	x;
+	printf("x : %d | y : %d | size : %d", sqr.x, sqr.y, sqr.size);
+	y = sqr.y;
+	while (y < sqr.y + sqr.size - 1)
+	{
+		x = sqr.size;
+		while (x < sqr.x + sqr.size - 1)
+		{
+			data->tab[y][x] = 2;
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}

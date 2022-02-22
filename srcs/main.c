@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:46:24 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 19:08:32 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 20:57:35 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int	main(void)
 	int	o;
 
 	o = fill_tab(&data, "map.test");
-	printf("%d\n", o);
 	print_grid(&data);
 	sqr = solve_tab(&data);
-	printf("%d | %d | size : %d\n", sqr.x, sqr.y, sqr.size);
+	printf("\n");
+	//printf("hauteur = %d | largeur = %d | size : %d\n\n", sqr.y, sqr.x, sqr.size - 1);
+	fill_with_square(&data, sqr);
+	print_grid(&data);
 	ft_free_tab(data.tab, data.height);
 	return (0);
 }

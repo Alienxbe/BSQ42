@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bsq.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:43:52 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 19:11:56 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 20:36:18 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_data
 
 // Square
 t_sqr	solve_tab(t_data *data);
+int	fill_with_square(t_data *data, t_sqr sqr);
 
 // Tab
 int		fill_tab(t_data *data, char *filename);
