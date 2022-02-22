@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_ctype.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 18:46:24 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 01:27:26 by maykman          ###   ########.fr       */
+/*   Created: 2022/02/22 00:44:37 by maykman           #+#    #+#             */
+/*   Updated: 2022/02/22 00:45:53 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int main(void)
+int	ft_isdigit(char c)
 {
-	t_data	data;
+	return (c >= '0' && c <= '9');
+}
 
-	fill_tab(&data, NULL);
-	return (0);
+int	ft_isprint(char c)
+{
+	return (c >= 32 && c <= 126);
 }
