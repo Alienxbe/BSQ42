@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 01:24:09 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 01:30:31 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,15 @@ int	fill_tab(t_data *data, char *filename)
 			// Check char
 			// fill ligne
 			data->width = ft_strlen(line);
+			data->tab = malloc_tab(); // Fonction a faire
 		}
 		else
 		{
 			// Check width
 			// Check char
 			// Fill ligne
+			if (ft_strlen(line) != data->width)
+				return (ERROR);
 		}
 		i++;
 	}
