@@ -6,7 +6,7 @@
 #    By: maykman <maykman@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 19:34:14 by maykman           #+#    #+#              #
-#    Updated: 2022/02/22 23:13:00 by maykman          ###   ########.fr        #
+#    Updated: 2022/02/23 00:28:22 by maykman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,10 @@ SRCS		:=	fill_tab.c \
 				ft_atoi.c \
 				ft_ctype.c \
 				ft_malloc.c \
-				get_next_line.c \
-				get_next_line_utils.c \
 				main.c \
-				solve.c
+				read_file.c \
+				solve.c \
+				utils.c
 OBJS		:=	$(addprefix srcs/, ${SRCS:.c=.o})
 
 # RULES

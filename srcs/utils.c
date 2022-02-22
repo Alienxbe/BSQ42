@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:51:30 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 17:20:47 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 23:50:47 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,4 @@ void	*ft_memcpy(void *dest, void *src, int n)
 	while (n--)
 		*((unsigned char *)dest + n) = *((unsigned char *)src + n);
 	return (dest);
-}
-
-char	*ft_substr(char *s, int start, int len, int s_free)
-{
-	char	*p;
-
-	if (len < 0)
-		len = ft_strlen(s);
-	p = (char *)malloc(sizeof(*p) * (len + 1));
-	if (p)
-	{
-		p[len] = 0;
-		ft_memcpy(p, s + start, len);
-	}
-	if (s_free || !p)
-		free(s);
-	return (p);
 }

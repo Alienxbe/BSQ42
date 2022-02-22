@@ -6,21 +6,18 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 23:06:55 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 23:11:03 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 00:14:33 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int	ft_atoi(char **str)
+int	ft_atoi(char *str, int *i)
 {
 	int	n;
 
 	n = 0;
-	while (ft_isdigit(**str))
-	{
-		n = n * 10 + (**str - '0');
-		(*str)++;
-	}
+	while (ft_isdigit(str[*i]))
+		n = n * 10 + (str[*(i++)] - '0');
 	return (n);
 }

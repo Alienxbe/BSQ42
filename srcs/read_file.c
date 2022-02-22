@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:48:36 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 17:20:43 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 00:40:17 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-char	*gnl_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		size;
 	char	*ptr;
 
 	size = ft_strlen(s1) + ft_strlen(s2);
+	printf("Pre copy\n");
 	ptr = (char *)malloc(sizeof(char) * (size + 1));
 	if (!ptr)
 		return (NULL);
@@ -29,31 +30,23 @@ char	*gnl_strjoin(char *s1, char *s2)
 	return (ptr);
 }
 
-int	get_next_line(int fd, char **line)
+int	read_file(int fd, char **line)
 {
-	static char	*saved;
-	char		*buff;
-	int			bytes;
+	char	*buff;
+	int		byte;
 
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!line || read(fd, NULL, 0) < 0 || !buff)
-		return (gnl_free_return(&buff, -1));
-	bytes = 1;
-	while (ft_index(saved, '\n') < 0 && bytes != 0)
+	byte = 1;
+	while (byte)
 	{
-		bytes = (int)read(fd, buff, BUFFER_SIZE);
-		buff[bytes] = 0;
-		saved = gnl_strjoin(saved, buff);
-		if (!saved)
-			return (gnl_free_return(&buff, -1));
+		byte = read(fd, buff, BUFFER_SIZE);
+		buff[byte] = 0;
+		printf("%s | %p\n", buff, line);
+		*line = ft_strjoin(*line, buff);
+		printf("%s\n", *line);
+		if (!line)
+			return (gnl_free_return(&buff, MALLOC_ERROR));
 	}
 	free(buff);
-	*line = ft_substr(saved, 0, ft_index(saved, '\n'), 0);
-	saved = ft_substr(saved, ft_index(saved, '\n') + 1,
-			ft_strlen(saved) - ft_index(saved, '\n'), 1);
-	if (!*line || !saved)
-		return (gnl_free_return(line, -1));
-	if (!bytes)
-		return (gnl_free_return(&saved, 0));
-	return (1);
+	return (0);
 }
