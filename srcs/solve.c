@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/22 19:03:18 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/22 19:13:18 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,26 @@ static int	check_plague(t_data data, int size, int x, int y)
 		return (0);
 }
 
-static t_sqr	plague(t_data *data, int x, int y)
+t_sqr	plague(t_data *data,t_sqr *max, int x, int y)
 {
-	int		size_tmp;
-	t_sqr	max;
-	
-	size_tmp = max.size;
-	if (y + max.size >= data->height || x + max.size >= data->width)
-		return (max);
-	while (check_plague(*data, size_tmp, x, y))
+	int	size_tmp;
+
+	if (y + max->size >= data->height || x + max->size >= data->width)
+		return (*max);
+	while (check_plague(*data, max->size, x, y))
 	{
-		size_tmp++;
-		if (!check_plague(*data, size_tmp, x, y))
+		size_tmp = max->size + 1;
+		if (check_plague(*data, size_tmp, x, y))
 		{
-			max.size++;
-			max.y = y;
-			max.x = x;
+			max->size++;
+			max->y = y;
+			max->x = x;
 		}
 	}
-	return (max);
+	return (*max);
 }
 
-t_sqr solve_tab(t_data *data)
+t_sqr	solve_tab(t_data *data)
 {
 	t_sqr	max;
 	int y;
@@ -68,11 +66,11 @@ t_sqr solve_tab(t_data *data)
 		{
 			if (!data->tab[y][x])
 			{
-				max = plague(data, x, y);
+				max = plague(data, &max, x,y);
 			}
 		}
 	}
 	return (max);
-}
+} 
 
-int		fill_with_square
+// int		fill_with_square
