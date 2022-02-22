@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/22 18:03:16 by ademurge         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:35:24 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_plague(t_data data, int size, int x, int y)
 	{
 		tmp = x - 1;
 		while (tmp < tmp + size && tmp < data.width)
-			if (data.tab[y][tmp++] == data.block.obs)
+			if (data.tab[y][tmp++])
 				return (1);
 		if (tmp >= data.width)
 			return  (1);
@@ -37,12 +37,12 @@ t_sqr	plague(t_data *data, t_sqr *max, int x, int y)
 	int	size_tmp;
 	
 	size_tmp = max->size;
-	if (y + max->size >= data->height || x + max->size >= data->width)
+	if (y + max->size - 1 >= data->height || x + max->size - 1 >= data->width)
 		return (*max);
-	while (check_plague(*data, size_tmp, x, y))
+	while (!check_plague(*data, size_tmp, x, y))
 	{
 		size_tmp++;
-		if (check_plague(*data, size_tmp, x, y))
+		if (!check_plague(*data, size_tmp, x, y))
 		{
 			max->size++;
 			max->y = y;
@@ -73,3 +73,5 @@ t_sqr solve_tab(t_data *data)
 	}
 	return (max);
 }
+
+int		fill_with_square
