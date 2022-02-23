@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:46:24 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 14:08:32 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 14:42:40 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,35 @@ void	ft_error(int error)
 	}
 }
 
-int	main(int argc, char **argv)
+void	ft_solve_map(char *filename)
 {
 	t_data	data;
-	int		i;
 	int		out;
 
-	if (argc < 2)
+	out = fill_tab(&data, filename);
+	ft_error(out);
+	if (out != MAP_ERROR)
 	{
-		out = fill_tab(&data, NULL);
-		ft_error(out);
-		if (out != MAP_ERROR)
-		{
-			out = fill_with_bsq(&data, solve_tab(&data));
-			ft_error(out);
-			if (out != MAP_ERROR)
-				print_tab(&data);
-		}
-		ft_free_tab(data.tab, data.height);
+		fill_with_bsq(&data, solve_tab(&data));
+		print_tab(&data);
 	}
+	ft_free_tab(data.tab, data.height);
+}
+
+int	main(int argc, char **argv)
+{
+	int		i;
+
+	if (argc < 2)
+		ft_solve_map(NULL);
 	else
 	{
 		i = 0;
 		while (++i < argc)
 		{
-			out = fill_tab(&data, argv[i]);
-			ft_error(out);
-			if (out != MAP_ERROR)
-			{
-				fill_with_bsq(&data, solve_tab(&data));
-				print_tab(&data);
-			}
-			ft_free_tab(data.tab, data.height);
-			ft_putchar('\n');
+			ft_solve_map(argv[i]);
+			if (i + 1 < argc)
+				ft_putchar('\n');
 		}
 	}
 	return (0);
