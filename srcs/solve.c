@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/22 21:33:20 by ademurge         ###   ########.fr       */
+/*   Updated: 2022/02/22 21:40:58 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ t_sqr	plague(t_data *data,t_sqr *max, int x, int y)
 	int	size_tmp;
 
 	size_tmp = max->size;
+	
 	if (y + max->size > data->height || x + max->size > data->width)
 		return (*max);
+	printf("%d\n", size_tmp);
 	while (check_plague(*data, ++size_tmp, x, y))
 	{
 			max->size++;
@@ -67,7 +69,7 @@ t_sqr	solve_tab(t_data *data)
 		x = -1;
 		while (++x < data->width)
 			if (!data->tab[y][x])
-				max = plague(data, &max, x,y);
+				plague(data, &max, x,y);
 	}
 	return (max);
 } 
