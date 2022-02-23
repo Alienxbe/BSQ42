@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/22 21:40:58 by ademurge         ###   ########.fr       */
+/*   Updated: 2022/02/23 10:43:53 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,3 @@ t_sqr	solve_tab(t_data *data)
 	return (max);
 } 
 
-int	fill_with_square(t_data *data, t_sqr sqr)
-{
-	int	y;
-	int	x;
-	printf("x : %d | y : %d | size : %d", sqr.x, sqr.y, sqr.size);
-	y = sqr.y;
-	while (y < sqr.y + sqr.size - 1)
-	{
-		x = sqr.size;
-		while (x < sqr.x + sqr.size - 1)
-		{
-			data->tab[y][x] = 2;
-			x++;
-		}
-		y++;
-	}
-	return (1);
-}
