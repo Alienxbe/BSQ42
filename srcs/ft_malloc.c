@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:23:23 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 13:05:47 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 15:17:38 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	malloc_tab(t_data *data, char *line)
 
 int	ft_free_tab(t_tab tab, int y)
 {
-	if (!tab)
+	if (!tab || !*tab)
 		return (MALLOC_ERROR);
 	while (--y)
 		free(tab[y]);

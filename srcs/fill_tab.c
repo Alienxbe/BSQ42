@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 14:29:16 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 15:12:37 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	get_params(t_data *data, char *line)
 
 	height = ft_atoi(&line);
 	if (height <= 0 || ft_strlen(line) != 3 || !ft_str_is(line, &ft_isprint))
+		return (MAP_ERROR);
+	if (line[0] == line[1] || line[0] == line[2] || line[1] == line[2])
 		return (MAP_ERROR);
 	data->height = height;
 	data->block.empty = line[0];
@@ -80,6 +82,8 @@ static int	parse_file(t_data *data, int fd)
 		if (byte && i > 0 && fill_line(data, line, i - 1, &obs))
 			return (MAP_ERROR);
 		i++;
+		if (byte)
+			free(line);
 	}
 	if (i - 2 != data->height || !obs)
 		return (MAP_ERROR);

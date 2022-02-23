@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:46:24 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 14:42:40 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 15:17:19 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,7 @@ int	main(int argc, char **argv)
 	{
 		i = 0;
 		while (++i < argc)
-		{
 			ft_solve_map(argv[i]);
-			if (i + 1 < argc)
-				ft_putchar('\n');
-		}
 	}
 	return (0);
 }
