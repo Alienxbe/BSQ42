@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 15:12:37 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 16:42:01 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ static int	parse_file(t_data *data, int fd)
 		if (byte < 0)
 			return (GNL_ERROR);
 		if (byte && !i && get_params(data, line))
-			return (MAP_ERROR);
+			return (gnl_free_return(&line, MAP_ERROR));
 		if (byte && i == 1 && malloc_tab(data, line))
-			return (MALLOC_ERROR);
+			return (gnl_free_return(&line, MALLOC_ERROR));
 		if (byte && i > 0 && fill_line(data, line, i - 1, &obs))
-			return (MAP_ERROR);
+			return (gnl_free_return(&line, MAP_ERROR));
 		i++;
-		if (byte)
+		if (line)
 			free(line);
 	}
 	if (i - 2 != data->height || !obs)
@@ -97,9 +97,7 @@ int	fill_tab(t_data *data, char *filename)
 
 	fd = open_file(filename);
 	if (fd < 0)
-		return (OPEN_FILE_ERROR);
+		return (MAP_ERROR);
 	out = parse_file(data, fd);
-	if (out)
-		return (out);
-	return (0);
+	return (out);
 }

@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:23:23 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 15:17:38 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 17:00:06 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	malloc_tab(t_data *data, char *line)
 
 	data->width = ft_strlen(line);
 	if (!data->width)
-		return (ERROR);
+		return (MAP_ERROR);
 	data->tab = (t_tab)malloc(sizeof(*data->tab) * data->height);
 	if (!data->tab)
 		return (MALLOC_ERROR);
@@ -36,7 +36,7 @@ int	ft_free_tab(t_tab tab, int y)
 {
 	if (!tab || !*tab)
 		return (MALLOC_ERROR);
-	while (--y)
+	while (--y >= 0)
 		free(tab[y]);
 	free(tab);
 	return (MALLOC_ERROR);

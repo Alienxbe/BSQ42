@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:43:52 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 15:17:14 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 16:55:33 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 # include <sys/uio.h>
 # include <unistd.h>
 
-// TO REMOVE !!!!!
-# include <stdio.h>
-
 /*
 ** Define constants
 */
@@ -29,12 +26,10 @@
 # define BUFFER_SIZE		10000
 # define ERROR				1
 # define MALLOC_ERROR		2
-# define OPEN_FILE_ERROR	3
-# define MAP_ERROR			4
-# define GNL_ERROR			5
+# define MAP_ERROR			3
+# define GNL_ERROR			4
 # define MAP_ERROR_MSG		"map error\n"
 # define MALLOC_ERROR_MSG	"malloc error\n"
-# define GNL_ERROR_MSG		"gnl error\n"
 
 /*
 ** Typedef
