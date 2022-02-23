@@ -3,74 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/23 10:43:53 by ademurge         ###   ########.fr       */
+/*   Updated: 2022/02/23 10:54:34 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-static int	check_plague(t_data data, int size, int x, int y)
+static int	check_obs(t_data *data, t_sqr sqr)
 {
-	int	x_tmp;
-	int y_tmp;
+	int	i;
+	int	j;
 
-	y_tmp = y;
-	if (!size)
-		return (1);
-	while ((y_tmp < data.height && y_tmp < y + size))
+	if (sqr.x + sqr.size - 1 >= data->width
+		|| sqr.y + sqr.size - 1 >= data->height)
+		return (ERROR);
+	i = -1;
+	while (++i < sqr.size)
 	{
-		x_tmp = x;
-		while ((x_tmp < x + size && x_tmp < data.width))
-			if (data.tab[y_tmp][x_tmp++])
-				return (0);
-		if (x_tmp >= data.width)
-			return (0);
-		y_tmp++;
+		j = -1;
+		while (++j < sqr.size)
+			if (data->tab[sqr.y + i][sqr.x + j])
+				return (ERROR);
 	}
-	if (y >= data.height)
-		return(0);
-	else
-		return (1);
+	return (0);
 }
 
-t_sqr	plague(t_data *data,t_sqr *max, int x, int y)
+static t_sqr	find_biggest_sqr(t_data *data, int x, int y)
 {
-	int	size_tmp;
+	t_sqr	sqr;
 
-	size_tmp = max->size;
-	
-	if (y + max->size > data->height || x + max->size > data->width)
-		return (*max);
-	printf("%d\n", size_tmp);
-	while (check_plague(*data, ++size_tmp, x, y))
-	{
-			max->size++;
-			max->y = y;
-			max->x = x;
-	}
-	return (*max);
+	sqr.x = x;
+	sqr.y = y;
+	sqr.size = 1;
+	while (!check_obs(data, sqr))
+		sqr.size++;
+	sqr.size--;
+	return (sqr);
 }
 
 t_sqr	solve_tab(t_data *data)
 {
-	t_sqr	max;
-	int y;
-	int x;
+	t_sqr	sqr;
+	t_sqr	tmp;
+	int		x;
+	int		y;
 
-	max.size = 0;
-	max.x = 0;
-	max.y = 0;
+	sqr.size = 0;
+	sqr.x = 0;
+	sqr.y = 0;
 	y = -1;
 	while (++y < data->height)
 	{
 		x = -1;
 		while (++x < data->width)
+		{
 			if (!data->tab[y][x])
-				plague(data, &max, x,y);
+			{
+				tmp = find_biggest_sqr(data, x, y);
+				if (tmp.size > sqr.size)
+					sqr = tmp;
+			}
+		}
 	}
-	return (max);
-} 
-
+	return (sqr);
+}

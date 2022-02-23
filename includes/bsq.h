@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bsq.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:43:52 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/22 20:36:18 by ademurge         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:31:20 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,29 +65,30 @@ typedef struct s_data
 ** Functions
 */
 
-// Square
-t_sqr	solve_tab(t_data *data);
-int	fill_with_square(t_data *data, t_sqr sqr);
-
-// Tab
+// Main
 int		fill_tab(t_data *data, char *filename);
-
-// GNL
 int		get_next_line(int fd, char **line);
+int		fill_with_bsq(t_data *data, t_sqr sqr);
+t_sqr	solve_tab(t_data *data);
 
-// Utils
-char	*gnl_strjoin(char *s1, char *s2);
-char	*ft_substr(char *s, int start, int len, int s_free);
-void	*ft_memcpy(void *dest, void *src, int n);
-int		ft_strlen(char *s);
-int		ft_index(char *s, char c);
+// Stdout
+void	ft_putchar(char c);
+void	print_tab(t_data *data);
 
 // Malloc's
 int		malloc_tab(t_data *data, char *line);
 int		gnl_free_return(char **str, int ret_value);
 int		ft_free_tab(t_tab tab, int y);
 
-// Ctype
+// GNL Utils
+char	*gnl_strjoin(char *s1, char *s2);
+char	*ft_substr(char *s, int start, int len, int s_free);
+void	*ft_memcpy(void *dest, void *src, int n);
+int		ft_strlen(char *s);
+int		ft_index(char *s, char c);
+
+// String utils
+int		ft_atoi(char **str);
 int		ft_str_is(char *str, int (*f)(char));
 int		ft_isdigit(char c);
 int		ft_isprint(char c);
