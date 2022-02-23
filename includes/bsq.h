@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:43:52 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 11:31:20 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 13:22:17 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@
 ** Define constants
 */
 
-# define BUFFER_SIZE		10
-# define MALLOC_ERROR		1
+# define BUFFER_SIZE		10000
 # define ERROR				1
-# define OPEN_FILE_ERROR	1
-# define MAP_ERROR			1
-# define GNL_ERROR			1
+# define MALLOC_ERROR		2
+# define OPEN_FILE_ERROR	3
+# define MAP_ERROR			4
+# define GNL_ERROR			5
+# define MAP_ERROR_MSG		"map error\n"
+# define MALLOC_ERROR_MSG
 
 /*
 ** Typedef
@@ -68,11 +70,12 @@ typedef struct s_data
 // Main
 int		fill_tab(t_data *data, char *filename);
 int		get_next_line(int fd, char **line);
-int		fill_with_bsq(t_data *data, t_sqr sqr);
 t_sqr	solve_tab(t_data *data);
+int		fill_with_bsq(t_data *data, t_sqr sqr);
 
 // Stdout
 void	ft_putchar(char c);
+void	ft_putstr(char *str);
 void	print_tab(t_data *data);
 
 // Malloc's

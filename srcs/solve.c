@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:38:36 by ademurge          #+#    #+#             */
-/*   Updated: 2022/02/23 10:54:34 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 13:07:56 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,23 @@ static t_sqr	find_biggest_sqr(t_data *data, int x, int y)
 		sqr.size++;
 	sqr.size--;
 	return (sqr);
+}
+
+int	fill_with_bsq(t_data *data, t_sqr sqr)
+{
+	int	y;
+	int	x;
+
+	if (!sqr.size)
+		return (MAP_ERROR);
+	y = sqr.y - 1;
+	while (++y < sqr.y + sqr.size)
+	{
+		x = sqr.x - 1;
+		while (++x < sqr.x + sqr.size)
+			data->tab[y][x] = 2;
+	}
+	return (0);
 }
 
 t_sqr	solve_tab(t_data *data)

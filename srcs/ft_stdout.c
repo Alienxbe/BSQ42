@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:28:22 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 11:29:56 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 11:56:52 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	ft_putchar(char c)
 {
-	write(1, &c, 1);
+	write(STDOUT_FILENO, &c, 1);
+}
+
+void	ft_putstr(char *str)
+{
+	write(STDOUT_FILENO, str, ft_strlen(str));
 }
 
 static void	ft_putchar_tab(t_data *data, int n)

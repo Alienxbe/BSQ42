@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 11:37:33 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 13:03:06 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	open_file(char *filename)
 	int	fd;
 
 	if (!filename)
-		return (0);
+		return (STDIN_FILENO);
 	fd = open(filename, O_RDONLY);
 	return (fd);
 }
@@ -36,7 +36,7 @@ static int	get_params(t_data *data, char *line)
 	return (0);
 }
 
-static int	fill_line(t_data *data, char *line, int y)
+static int	fill_line(t_data *data, char *line, int y, int *obs)
 {
 	int	x;
 
@@ -48,7 +48,10 @@ static int	fill_line(t_data *data, char *line, int y)
 		if (line[x] == data->block.empty)
 			data->tab[y][x] = 0;
 		else if (line[x] == data->block.obs)
+		{
 			data->tab[y][x] = 1;
+			(*obs)++;
+		}
 		else
 			return (MAP_ERROR);
 	}
@@ -61,10 +64,12 @@ int	fill_tab(t_data *data, char *filename)
 	int		byte;
 	int		fd;
 	int		i;
+	int		obs;
 
 	fd = open_file(filename);
 	if (fd < 0)
 		return (OPEN_FILE_ERROR);
+	obs = 0;
 	byte = 1;
 	i = 0;
 	while (byte)
@@ -76,12 +81,11 @@ int	fill_tab(t_data *data, char *filename)
 			return (MAP_ERROR);
 		if (byte && i == 1 && malloc_tab(data, line)) // First map line
 			return (MALLOC_ERROR);
-		if (byte && i > 0 && fill_line(data, line, i - 1)) // Read line
+		if (byte && i > 0 && fill_line(data, line, i - 1, &obs)) // Read line
 			return (MAP_ERROR);
 		i++;
-		printf("Ligne : %d", i);
 	}
-	if (i - 2 != data->height)
+	if (i - 2 != data->height || !obs)
 		return (MAP_ERROR);
 	return (0);
 }

@@ -6,40 +6,57 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:46:24 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 11:31:55 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 13:11:54 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-int	fill_with_bsq(t_data *data, t_sqr sqr)
+void	ft_error(int error)
 {
-	int	y;
-	int	x;
-	
-	y = sqr.y - 1;
-	while (++y < sqr.y + sqr.size )
+	if (error == MAP_ERROR)
+		ft_putstr(MAP_ERROR_MSG);
+	else if (error == MALLOC_ERROR)
 	{
-		x = sqr.x - 1;
-		while (++x < sqr.x + sqr.size)
-			data->tab[y][x] = 2;
+		ft_putstr("Malloc error\n");
+		exit(1);
 	}
-	return (1);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_data	data;
-	t_sqr	sqr;
-	int	o;
+	int		i;
+	int		out;
 
-	o = fill_tab(&data, "map.test");
-	printf("%d\n", o);
-	print_tab(&data);
-	sqr = solve_tab(&data);
-	printf("\n");
-	fill_with_bsq(&data, sqr);
-	print_tab(&data);
-	ft_free_tab(data.tab, data.height);
+	if (argc < 2)
+	{
+		out = fill_tab(&data, NULL);
+		ft_error(out);
+		if (out != MAP_ERROR)
+		{
+			out = fill_with_bsq(&data, solve_tab(&data));
+			ft_error(out);
+			if (out != MAP_ERROR)
+				print_tab(&data);
+		}
+		ft_free_tab(data.tab, data.height);
+	}
+	else
+	{
+		i = 0;
+		while (++i < argc)
+		{
+			out = fill_tab(&data, argv[i]);
+			ft_error(out);
+			if (out != MAP_ERROR)
+			{
+				fill_with_bsq(&data, solve_tab(&data));
+				print_tab(&data);
+			}
+			ft_free_tab(data.tab, data.height);
+			ft_putchar('\n');
+		}
+	}
 	return (0);
 }
