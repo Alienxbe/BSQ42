@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 19:23:01 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 13:03:06 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 14:29:16 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	fill_line(t_data *data, char *line, int y, int *obs)
 {
 	int	x;
 
-	if (ft_strlen(line) != data->width)
+	if (ft_strlen(line) != data->width || y >= data->height)
 		return (MAP_ERROR);
 	x = -1;
 	while (++x < data->width)
@@ -58,17 +58,13 @@ static int	fill_line(t_data *data, char *line, int y, int *obs)
 	return (0);
 }
 
-int	fill_tab(t_data *data, char *filename)
+static int	parse_file(t_data *data, int fd)
 {
 	char	*line;
-	int		byte;
-	int		fd;
-	int		i;
 	int		obs;
+	int		i;
+	int		byte;
 
-	fd = open_file(filename);
-	if (fd < 0)
-		return (OPEN_FILE_ERROR);
 	obs = 0;
 	byte = 1;
 	i = 0;
@@ -77,15 +73,29 @@ int	fill_tab(t_data *data, char *filename)
 		byte = get_next_line(fd, &line);
 		if (byte < 0)
 			return (GNL_ERROR);
-		if (byte && !i && get_params(data, line)) // First line read
+		if (byte && !i && get_params(data, line))
 			return (MAP_ERROR);
-		if (byte && i == 1 && malloc_tab(data, line)) // First map line
+		if (byte && i == 1 && malloc_tab(data, line))
 			return (MALLOC_ERROR);
-		if (byte && i > 0 && fill_line(data, line, i - 1, &obs)) // Read line
+		if (byte && i > 0 && fill_line(data, line, i - 1, &obs))
 			return (MAP_ERROR);
 		i++;
 	}
 	if (i - 2 != data->height || !obs)
 		return (MAP_ERROR);
+	return (0);
+}
+
+int	fill_tab(t_data *data, char *filename)
+{
+	int	fd;
+	int	out;
+
+	fd = open_file(filename);
+	if (fd < 0)
+		return (OPEN_FILE_ERROR);
+	out = parse_file(data, fd);
+	if (out)
+		return (out);
 	return (0);
 }

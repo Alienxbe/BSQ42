@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:43:52 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 13:22:17 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 14:05:48 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 # define MAP_ERROR			4
 # define GNL_ERROR			5
 # define MAP_ERROR_MSG		"map error\n"
-# define MALLOC_ERROR_MSG
+# define MALLOC_ERROR_MSG	"malloc error\n"
+# define GNL_ERROR_MSG		"gnl error\n"
 
 /*
 ** Typedef
@@ -82,6 +83,7 @@ void	print_tab(t_data *data);
 int		malloc_tab(t_data *data, char *line);
 int		gnl_free_return(char **str, int ret_value);
 int		ft_free_tab(t_tab tab, int y);
+void	ft_error(int error);
 
 // GNL Utils
 char	*gnl_strjoin(char *s1, char *s2);

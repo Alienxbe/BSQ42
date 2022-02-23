@@ -6,7 +6,7 @@
 /*   By: maykman <maykman@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:46:24 by maykman           #+#    #+#             */
-/*   Updated: 2022/02/23 13:11:54 by maykman          ###   ########.fr       */
+/*   Updated: 2022/02/23 14:08:32 by maykman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ void	ft_error(int error)
 		ft_putstr(MAP_ERROR_MSG);
 	else if (error == MALLOC_ERROR)
 	{
-		ft_putstr("Malloc error\n");
+		ft_putstr(MALLOC_ERROR_MSG);
+		exit(1);
+	}
+	else if (error == GNL_ERROR)
+	{
+		ft_putstr(GNL_ERROR_MSG);
 		exit(1);
 	}
 }
