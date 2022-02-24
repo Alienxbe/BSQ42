@@ -1,0 +1,3 @@
+- digit as empty character
+- Condition for at least one obstacle on map is false. True condition is : at least one element on the grid (any type of character)
+- Maybe more...
